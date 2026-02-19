@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c303afb8-63da-4a1d-9c2e-a0c246c66d37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../auth-api/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-api/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auth-api/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-api/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-api/src/modules/user/controller/UserController.js" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-api/src/modules/user/controller/UserController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-api/src/modules/user/routes/UserRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-api/src/modules/user/routes/UserRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auth-api/src/modules/user/service/UserService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../auth-api/src/modules/user/service/UserService.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,18 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "angelokapunda"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;angelokapunda&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/angelokapunda/curso_microsservicos.git",
-    "accountId": "b6b68352-0749-4a52-9a59-196534a99e21"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/angelokapunda/curso_microsservicos.git&quot;,
+    &quot;accountId&quot;: &quot;b6b68352-0749-4a52-9a59-196534a99e21&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -42,24 +43,24 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="38JOZWWFCjwMCSHHLl74eRMHL6a" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ProductApiApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/angelocarlos/Documentos/curso-arquitetura-microsservicos/repositorio/product-API",
-    "settings.editor.selected.configurable": "preferences.keymap"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ProductApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/angelocarlos/Documentos/curso-arquitetura-microsservicos/repositorio/product-API&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="ProductApiApplication" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="br.com.microsservicos.product_API.ProductApiApplication" />
