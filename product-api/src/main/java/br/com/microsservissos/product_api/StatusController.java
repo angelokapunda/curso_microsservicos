@@ -1,4 +1,4 @@
-package br.com.microsservicos.product_API;
+package br.com.microsservissos.product_api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api")
-public class StatusContoller {
+public class StatusController {
 
     @GetMapping("/status")
     public ResponseEntity<HashMap<String, Object>> getApiStatus() {

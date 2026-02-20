@@ -1,4 +1,4 @@
-package br.com.microsservicos.product_API;
+package br.com.microsservissos.product_api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

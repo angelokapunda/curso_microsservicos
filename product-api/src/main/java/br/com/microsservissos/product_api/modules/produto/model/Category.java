@@ -1,4 +1,4 @@
-package br.com.microsservicos.product_API.modules.produto.model;
+package br.com.microsservissos.product_api.modules.produto.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +9,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 @Data
 @Entity

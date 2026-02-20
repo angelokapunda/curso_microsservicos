@@ -1,4 +1,4 @@
-package br.com.microsservicos.product_API.modules.produto.model;
+package br.com.microsservissos.product_api.modules.produto.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,11 +32,11 @@ public class Supplier {
         this.id = id;
     }
 
-    public String getNome() {
+    public String getName() {
         return name;
     }
 
-    public void setNome(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

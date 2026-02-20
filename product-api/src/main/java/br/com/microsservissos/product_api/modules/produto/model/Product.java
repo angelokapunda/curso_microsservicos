@@ -1,4 +1,4 @@
-package br.com.microsservicos.product_API.modules.produto.model;
+package br.com.microsservissos.product_api.modules.produto.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,6 +59,14 @@ public class Product {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Integer getQuantityAvailable() {
+        return quantityAvailable;
+    }
+
+    public void setQuantityAvailable(Integer quantityAvailable) {
+        this.quantityAvailable = quantityAvailable;
     }
 
     public Supplier getSupplier() {
