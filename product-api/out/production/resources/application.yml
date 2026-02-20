@@ -23,4 +23,20 @@ spring:
     show_sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+
+
+
+
+
+
+
+
+
+
+
+
+
+    #autoconfigure:
+      #exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
