@@ -22,7 +22,7 @@ public class Supplier {
     private Integer id;
 
     @Column(name = "NAME", nullable = false)
-    private String nome;
+    private String name;
 
     public Integer getId() {
         return id;
@@ -33,10 +33,10 @@ public class Supplier {
     }
 
     public String getNome() {
-        return nome;
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String name) {
+        this.name = name;
     }
 }

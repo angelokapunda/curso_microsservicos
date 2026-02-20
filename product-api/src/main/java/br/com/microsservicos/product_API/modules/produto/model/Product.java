@@ -34,6 +34,9 @@ public class Product {
     @JoinColumn(name = "FK_CATEGORY", nullable = false)
     private Category category;
 
+    @Column(name = "QUANTITY_AVAILABLE")
+    private Integer quantityAvailable;
+
     public Category getCategory() {
         return category;
     }
