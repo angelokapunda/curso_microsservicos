@@ -1,13 +1,14 @@
 package br.com.microsservissos.product_api.modules.produto.service;
 
 import br.com.microsservissos.product_api.config.exception.ValidationException;
-import br.com.microsservissos.product_api.modules.produto.dto.CategoryRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.SupplierRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.SupplierResponse;
 import br.com.microsservissos.product_api.modules.produto.model.Supplier;
 import br.com.microsservissos.product_api.modules.produto.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
 
@@ -26,6 +27,22 @@ public class SupplierService {
     public Supplier findById ( Integer id) {
         return supplierRepository.findById(id)
                 .orElseThrow(() -> new ValidationException("There's no supplier for the given ID"));
+    }
+    public List<SupplierResponse> findAll() {
+        return supplierRepository.findAll()
+                .stream()
+                .map(supplier -> SupplierResponse.of(supplier))
+                .toList();
+    }
+    public SupplierResponse findByIdResponse(Integer id) {
+        return SupplierResponse.of(findById(id));
+    }
+
+    public List<SupplierResponse> findByName(String name) {
+        return supplierRepository.findByNameIgnoreCaseContaining(name)
+                .stream()
+                .map(supplier -> SupplierResponse.of(supplier))
+                .toList();
     }
 
     public void validateSupplierNameInformed(SupplierRequest supplierRequest) {

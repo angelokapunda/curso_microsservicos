@@ -31,7 +31,7 @@ public class ProductResponse {
     public static ProductResponse of (Product product) {
       ProductResponse productResponse = new ProductResponse();
       productResponse.setId(product.getId());
-      productResponse.setName(product.getNome());
+      productResponse.setName(product.getName());
       productResponse.setQualitityAvailable(product.getQuantityAvailable());
       productResponse.setCreatedAt(product.getCreatedAt());
       productResponse.setSupplier(SupplierResponse.of(product.getSupplier()));

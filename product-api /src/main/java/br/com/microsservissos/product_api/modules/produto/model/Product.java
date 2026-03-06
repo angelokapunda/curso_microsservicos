@@ -1,7 +1,6 @@
 package br.com.microsservissos.product_api.modules.produto.model;
 
 import br.com.microsservissos.product_api.modules.produto.dto.ProductRequest;
-import br.com.microsservissos.product_api.modules.produto.dto.SupplierRequest;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +13,6 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.BeanUtils;
 
 import java.time.LocalDateTime;
 
@@ -30,7 +28,7 @@ public class Product {
     private Integer id;
 
     @Column(name = "NAME", nullable = false)
-    private String nome;
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "FK_SUPPLIER", nullable = false)
@@ -53,7 +51,7 @@ public class Product {
 
     public static Product of (ProductRequest productRequest, Category category, Supplier supplier) {
         var product = new Product();
-        product.setNome(productRequest.getName());
+        product.setName(productRequest.getName());
         product.setQuantityAvailable(productRequest.getQuantityAvailable());
         product.setCategory(category);
         product.setSupplier(supplier);
@@ -77,12 +75,12 @@ public class Product {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getQuantityAvailable() {
