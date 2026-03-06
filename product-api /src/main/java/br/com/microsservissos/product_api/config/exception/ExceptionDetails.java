@@ -1,7 +1,9 @@
 package br.com.microsservissos.product_api.config.exception;
 
-public class ExceptionDetails {
+import lombok.Data;
 
+@Data
+public class ExceptionDetails {
 
     private int Status;
     private String message;

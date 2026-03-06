@@ -1,5 +1,7 @@
 package br.com.microsservissos.product_api.modules.produto.model;
 
+import br.com.microsservissos.product_api.modules.produto.dto.CategoryRequest;
+import br.com.microsservissos.product_api.modules.produto.dto.CategoryResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 @Data
 @Entity
@@ -23,6 +26,13 @@ public class Category {
 
     @Column(name = "DESCRIPTION", nullable = false)
     private String description;
+
+    public static Category of(CategoryRequest request) {
+        var category = new Category();
+        BeanUtils.copyProperties(request, category, "id");
+        return category;
+    }
+
 
     public String getDescription() {
         return description;

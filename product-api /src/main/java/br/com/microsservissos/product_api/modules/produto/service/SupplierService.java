@@ -1,17 +1,36 @@
 package br.com.microsservissos.product_api.modules.produto.service;
 
-import br.com.microsservissos.product_api.modules.produto.model.Category;
-import br.com.microsservissos.product_api.modules.produto.repository.CategoryRepository;
+import br.com.microsservissos.product_api.config.exception.ValidationException;
+import br.com.microsservissos.product_api.modules.produto.dto.CategoryRequest;
+import br.com.microsservissos.product_api.modules.produto.dto.SupplierRequest;
+import br.com.microsservissos.product_api.modules.produto.dto.SupplierResponse;
+import br.com.microsservissos.product_api.modules.produto.model.Supplier;
+import br.com.microsservissos.product_api.modules.produto.repository.SupplierRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Service
 public class SupplierService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
+    private SupplierRepository supplierRepository;
 
-    public Category save ( Category category) {
-        return categoryRepository.save(category);
+    public SupplierResponse save (SupplierRequest supplierRequest) {
+        validateSupplierNameInformed(supplierRequest);
+        var supplier = supplierRepository.save(Supplier.of(supplierRequest));
+        return SupplierResponse.of(supplier);
+    }
+
+    public Supplier findById ( Integer id) {
+        return supplierRepository.findById(id)
+                .orElseThrow(() -> new ValidationException("There's no supplier for the given ID"));
+    }
+
+    public void validateSupplierNameInformed(SupplierRequest supplierRequest) {
+        if (isEmpty(supplierRequest.getName())) {
+            throw new ValidationException("The Supplier was not informed");
+        }
     }
 }
