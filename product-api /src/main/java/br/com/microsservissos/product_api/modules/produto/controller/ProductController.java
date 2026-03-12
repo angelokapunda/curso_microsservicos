@@ -1,12 +1,17 @@
 package br.com.microsservissos.product_api.modules.produto.controller;
 
+import br.com.microsservissos.product_api.config.exception.SuccessResponse;
+import br.com.microsservissos.product_api.modules.produto.dto.CategoryRequest;
+import br.com.microsservissos.product_api.modules.produto.dto.CategoryResponse;
 import br.com.microsservissos.product_api.modules.produto.dto.ProductRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.ProductResponse;
 import br.com.microsservissos.product_api.modules.produto.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,5 +53,15 @@ public class ProductController {
     @GetMapping("/supplier/{supplierId}")
     public List<ProductResponse> findBySupplierId(@PathVariable Integer supplierId) {
         return productService.findBySupplierId(supplierId);
+    }
+
+    @PutMapping("/{id}")
+    public ProductResponse update (@RequestBody ProductRequest productRequest, @PathVariable Integer id) {
+        return productService.update(productRequest, id);
+    }
+
+    @DeleteMapping("/{id}")
+    public SuccessResponse delete (@PathVariable Integer id) {
+        return productService.delete(id);
     }
 }

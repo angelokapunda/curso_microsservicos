@@ -1,5 +1,6 @@
 package br.com.microsservissos.product_api.modules.produto.service;
 
+import br.com.microsservissos.product_api.config.exception.SuccessResponse;
 import br.com.microsservissos.product_api.config.exception.ValidationException;
 import br.com.microsservissos.product_api.modules.produto.dto.CategoryRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.CategoryResponse;
@@ -18,9 +19,21 @@ public class CategoryService {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ProductService productService;
+
     public CategoryResponse save(CategoryRequest categoryRequest) {
         validateCategoryNameInformed(categoryRequest);
         var category = categoryRepository.save(Category.of(categoryRequest));
+        return CategoryResponse.of(category);
+    }
+
+    public CategoryResponse update(CategoryRequest categoryRequest, Integer id) {
+        validateCategoryNameInformed(categoryRequest);
+        validateInformedId(id);
+        var category = Category.of(categoryRequest);
+        category.setId(id);
+        categoryRepository.save(category);
         return CategoryResponse.of(category);
     }
 
@@ -51,6 +64,21 @@ public class CategoryService {
     public void validateCategoryNameInformed(CategoryRequest categoryRequest) {
         if (isEmpty(categoryRequest.getDescription())) {
             throw new ValidationException("The category was not informed");
+        }
+    }
+
+    public SuccessResponse delete(Integer id) {
+        validateInformedId(id);
+        if (productService.existsByCategoryId(id)) {
+            throw new ValidationException("You cannot delete this supplier because it's already defined by a product.");
+        }
+        categoryRepository.deleteById(id);
+        return SuccessResponse.create("The Category was delete");
+    }
+
+    private void validateInformedId(Integer id) {
+        if (isEmpty(id)) {
+            throw new ValidationException("The Category Id must be informed");
         }
     }
 }

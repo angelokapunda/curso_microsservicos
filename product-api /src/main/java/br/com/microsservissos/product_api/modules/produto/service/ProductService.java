@@ -1,11 +1,13 @@
 package br.com.microsservissos.product_api.modules.produto.service;
 
+import br.com.microsservissos.product_api.config.exception.SuccessResponse;
 import br.com.microsservissos.product_api.config.exception.ValidationException;
 import br.com.microsservissos.product_api.modules.produto.dto.ProductRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.ProductResponse;
 import br.com.microsservissos.product_api.modules.produto.model.Product;
 import br.com.microsservissos.product_api.modules.produto.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,9 +22,11 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Lazy
     @Autowired
     private SupplierService supplierService;
 
+    @Lazy
     @Autowired
     private CategoryService categoryService;
 
@@ -32,6 +36,18 @@ public class ProductService {
         var category = categoryService.findById(productRequest.getCategoryId());
         var supplier = supplierService.findById(productRequest.getSupplierId());
         var product = productRepository.save(Product.of(productRequest, category, supplier));
+        return ProductResponse.of(product);
+    }
+
+    public ProductResponse update (ProductRequest productRequest, Integer id) {
+        validateProductNameInformed(productRequest);
+        validateInformedId(id);
+        validateCategoryAndSupplierIdInformed(productRequest);
+        var category = categoryService.findById(productRequest.getCategoryId());
+        var supplier = supplierService.findById(productRequest.getSupplierId());
+        var product = Product.of(productRequest, category, supplier);
+        product.setId(id);
+        productRepository.save(product);
         return ProductResponse.of(product);
     }
 
@@ -92,6 +108,26 @@ public class ProductService {
         }
         if (isEmpty(productRequest.getSupplierId())) {
             throw new ValidationException("The Supplier Id was not informed");
+        }
+    }
+
+    public Boolean existsByCategoryId (Integer categoryId) {
+        return productRepository.existsByCategoryId(categoryId);
+    }
+
+    public Boolean existsBySupplierId (Integer supplierId) {
+        return productRepository.existsBySupplierId(supplierId);
+    }
+
+    public SuccessResponse delete(Integer id) {
+        validateInformedId(id);
+        productRepository.deleteById(id);
+        return SuccessResponse.create("The Product was delete");
+    }
+
+    private void validateInformedId(Integer id) {
+        if (isEmpty(id)) {
+            throw new ValidationException("The supplier Id must be informed");
         }
     }
 }
