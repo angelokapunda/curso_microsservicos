@@ -10,11 +10,13 @@ import br.com.microsservissos.product_api.modules.produto.repository.ProductRepo
 import br.com.microsservissos.product_api.modules.sales.dto.SalesConfirmationDTO;
 import br.com.microsservissos.product_api.modules.sales.enums.SalesStatus;
 import br.com.microsservissos.product_api.modules.sales.rabbitmq.SalesConfirmationSender;
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.util.ObjectUtils.isEmpty;
@@ -157,23 +159,28 @@ public class ProductService {
             salesConfirmationSender.sendSalesConfirmationMesseg(rejectMessage);
         }
     }
+    @Transactional
     private void updateStock(ProductStockDTO productStockDTO) {
+        var productForUpdate = new ArrayList<Product>();
         productStockDTO.getProducts()
-                .forEach(salesProduct -> {
-                    var existingProduct = findById(salesProduct.getProductId());
-                    if (salesProduct.getQuantity() > existingProduct.getQuantityAvailable()) {
-                        throw new ValidationException(
-                                String.format("The product %S is out of stock", existingProduct.getId())
-                        );
-                    }
-                    existingProduct.updateStock(salesProduct.getQuantity());
-                    productRepository.save(existingProduct);
-                    var approvedMesssege = new SalesConfirmationDTO(productStockDTO.getSalesId(), SalesStatus.APPROVED);
-                    salesConfirmationSender.sendSalesConfirmationMesseg(approvedMesssege);
+            .forEach(salesProduct -> {
+                var existingProduct = findById(salesProduct.getProductId());
+                if (salesProduct.getQuantity() > existingProduct.getQuantityAvailable()) {
+                    throw new ValidationException(
+                            String.format("The product %S is out of stock", existingProduct.getId())
+                    );
+                }
+                existingProduct.updateStock(salesProduct.getQuantity());
+                productForUpdate.add(existingProduct);
+            });
+        if (!isEmpty(productForUpdate)) {
+            productRepository.saveAll(productForUpdate);
+            var approvedMesssege = new SalesConfirmationDTO(productStockDTO.getSalesId(), SalesStatus.APPROVED);
+            salesConfirmationSender.sendSalesConfirmationMesseg(approvedMesssege);
+        }
 
-                });
     }
-
+    @Transactional
     private void validateStockUpdateData(ProductStockDTO product) {
         if (isEmpty(product) || isEmpty(product.getSalesId())) {
             throw new ValidationException("The product data and sales ID must be informed");
