@@ -17,7 +17,7 @@ spring:
     initialization: always
     initialize: true
     continue-on-error: true
-    plataform: postgresql
+    platform: postgresql
     maxActive: 3
 
   jpa:
@@ -36,14 +36,20 @@ spring:
     password: ${RABBIT_MQ_PASSWORD:guest}
 
 app-config:
+
+  rabbit:
+
+    exchange:
+      product: product.exchange
+
+    routingKey:
+      product-stock: product-stock-update.routingKey
+      sales-confirmation: sales-confirmation.routingKey
+
+    queue:
+      product-stock: product-stock-update.queue
+      sales-confirmation: sales-confirmation.sales
+
   secrets:
     api:
       secrets: ${API_SECRET:YXV0aC1hcGktc2VjcmV0LWRldi0xMjM0NTY=}
-
-  routingKey:
-    product-stock: product-stock-update.routingKey
-    sales-confirmation: sales-confirmation.routingKey
-
-  queue:
-    product-stock: product-stock-update.queue
-    sales-confirmation: sales-confirmation.sales

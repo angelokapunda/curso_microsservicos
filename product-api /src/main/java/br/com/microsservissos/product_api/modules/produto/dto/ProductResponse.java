@@ -29,61 +29,18 @@ public class ProductResponse {
     private CategoryResponse category;
 
     public static ProductResponse of (Product product) {
-      ProductResponse productResponse = new ProductResponse();
-      productResponse.setId(product.getId());
-      productResponse.setName(product.getName());
-      productResponse.setQualitityAvailable(product.getQuantityAvailable());
-      productResponse.setCreatedAt(product.getCreatedAt());
-      productResponse.setSupplier(SupplierResponse.of(product.getSupplier()));
-      productResponse.setCategory(CategoryResponse.of(product.getCategory()));
-      return productResponse;
+      return ProductResponse.builder()
+              .id(product.getId())
+              .name(product.getName())
+              .qualitityAvailable(product.getQuantityAvailable())
+              .createdAt(product.getCreatedAt())
+              .supplier(SupplierResponse.of(product.getSupplier()))
+              .category(CategoryResponse.of(product.getCategory()))
+              .build();
     }
 
-    public CategoryResponse getCategory() {
-        return category;
+    public void updateStock(Integer quantity) {
+        qualitityAvailable -= quantity;
     }
 
-    public void setCategory(CategoryResponse category) {
-        this.category = category;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public SupplierResponse getSupplier() {
-        return supplier;
-    }
-
-    public Integer getQualitityAvailable() {
-        return qualitityAvailable;
-    }
-
-    public void setQualitityAvailable(Integer qualitityAvailable) {
-        this.qualitityAvailable = qualitityAvailable;
-    }
-
-    public void setSupplier(SupplierResponse supplier) {
-        this.supplier = supplier;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
 }

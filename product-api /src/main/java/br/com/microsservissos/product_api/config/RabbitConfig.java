@@ -29,6 +29,11 @@ public class RabbitConfig {
     private String salesConfirmationMq;
 
     @Bean
+    public Queue productStockQueue() {
+        return new Queue("product-stock-update.queue", true);
+    }
+
+    @Bean
     public TopicExchange produtTopicExchange() {
         return new TopicExchange(produtTopicExchange);
     }
@@ -59,8 +64,12 @@ public class RabbitConfig {
                 .with(salesConfirmationKey);
     }
 
+//    @Bean
+//    public MessageConverter jsonMessageConverter() {
+//        return new Jackson2JsonMessageConverter();
+//    }
     @Bean
-    public MessageConverter jsonMessageConverter() {
+    public Jackson2JsonMessageConverter messageConverter() {
         return new Jackson2JsonMessageConverter();
     }
 }

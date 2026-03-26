@@ -37,7 +37,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ProductResponse findById(@PathVariable Integer id) {
-        return productService.findById(id);
+        return productService.findByIdResponse(id);
     }
 
     @GetMapping("/name/{name}")
