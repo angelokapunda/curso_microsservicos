@@ -3,8 +3,10 @@ package br.com.microsservissos.product_api.modules.produto.controller;
 import br.com.microsservissos.product_api.config.exception.SuccessResponse;
 import br.com.microsservissos.product_api.modules.produto.dto.CategoryRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.CategoryResponse;
+import br.com.microsservissos.product_api.modules.produto.dto.ProductCheckStockRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.ProductRequest;
 import br.com.microsservissos.product_api.modules.produto.dto.ProductResponse;
+import br.com.microsservissos.product_api.modules.produto.dto.ProductSalesResponse;
 import br.com.microsservissos.product_api.modules.produto.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +32,11 @@ public class ProductController {
         return productService.save(productRequest);
     }
 
+    @PostMapping("/check-stock")
+    public SuccessResponse checkProductStock(@RequestBody ProductCheckStockRequest request) {
+        return productService.checkProductsStock(request);
+    }
+
     @GetMapping()
     public List<ProductResponse> findAll() {
         return productService.findAll();
@@ -53,6 +60,11 @@ public class ProductController {
     @GetMapping("/supplier/{supplierId}")
     public List<ProductResponse> findBySupplierId(@PathVariable Integer supplierId) {
         return productService.findBySupplierId(supplierId);
+    }
+
+    @GetMapping("{id}/sales")
+    public ProductSalesResponse findProductSales(@PathVariable Integer id) {
+        return productService.findProductSales(id);
     }
 
     @PutMapping("/{id}")
