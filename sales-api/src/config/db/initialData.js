@@ -48,6 +48,6 @@ export async function createInitialData() {
     });
 
     let initialData = await Order.find()
-        console.info(`Initial data was create: ${JSON.stringify(initialData)}`);
+        console.info(`Initial data was create: ${JSON.stringify(initialData, undefined, 4)}`);
     
 }
