@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 import { MONGO_DB_URL } from "../secrets/secrets.js";
 
-export function connect() {
+export function connectMongoDb() {
     mongoose.connect(MONGO_DB_URL);
     mongoose.connection.on("connected", function() {
         console.info("The application connected to MongoDB successFully");
